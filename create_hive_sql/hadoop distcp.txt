@@ -1,0 +1,59 @@
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_dotting/year=2015/month=06/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_dotting/year=2015/month=06
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_accesslog/year=2015/month=06/day=2015-06-18/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_accesslog/year=2015/month=06/day=2015-06-18
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_front_register/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_front_register
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_maccesslog/year=2015/month=06/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_maccesslog/year=2015/month=06
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_prom_register/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_prom_register
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_register_wxservice/year=2015/month=06/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_register_wxservice/year=2015/month=06
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_user_access/year=2015/month=06/day=18/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_user_access/year=2015/month=06/day=18
+ 
+
+hadoop distcp hftp://namenode01.hadoop:50070/user/hive/warehouse/datacenter.db/t_wapweb_user_register/* hdfs://test-hadoop02.dds.com/user/hive/warehouse/datacenter.db/t_wapweb_user_register
+
+
+create table datacenter.t_accesslog (source_type string,server_addr string,remote_addr string,time_local string,msec string,url string,request string,status string,connection string,request_time string,body_bytes_sent string,http_referer string,http_user_agent string,proxy_forwarded_for string,cookie string,city_id string,ngx_uid string)
+partitioned by (year string, month string, day string)
+stored as 
+inputformat 'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
+outputformat 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
+
+create table datacenter.t_maccesslog (payload string)
+partitioned by (year string, month string);
+
+create table datacenter.t_front_register (logtime string,type string,cookie string,userid string,flag string,source string,phone string,allvalue string);
+
+create table datacenter.t_prom_register (logtime string,type string,cookie string,userid string,mobile string);
+
+create table datacenter.t_register_wxservice (payload string)
+partitioned by (year string, month string);
+
+create table datacenter.t_user_access (payload string)
+partitioned by (year string, month string, day string)
+stored as 
+inputformat 'com.hadoop.mapred.DeprecatedLzoTextInputFormat'
+outputformat 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
+
+create table datacenter.t_wapweb_user_register (logtime string,type string,cookie string,userid string,flag string,machine_host string,machine_ip string,key string,allvalue string);
+
+
+SELECT * FROM DATACENTER.T_DOTTING WHERE YEAR = '2015' AND MONTH ='06'
+
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+ALTER TABLE DATACENTER.t_accesslog ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '2015-06-18')
+
+
+ALTER TABLE DATACENTER.t_user_access  ADD PARTITION (YEAR = '2015', MONTH = '09' , DAY = '18')
+
